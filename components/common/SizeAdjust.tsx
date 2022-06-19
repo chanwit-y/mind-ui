@@ -47,7 +47,7 @@ export const SizeAdjust: FC<Props> = ({
               }
             />
           }
-          label={<Typography fontSize={14}>{label}</Typography>}
+          label={<Typography fontSize={12} color={grey[500]}>{label}</Typography>}
         />
         <TextField
           type="number"
