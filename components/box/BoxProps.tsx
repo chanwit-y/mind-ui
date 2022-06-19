@@ -1,7 +1,14 @@
-import { Box, Slider, Typography } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Slider,
+  Typography,
+} from "@mui/material";
 import { CirclePicker } from "react-color";
 import React, { Dispatch, SetStateAction, FC, Fragment } from "react";
 import { BoxType } from "./BoxType";
+import { grey } from "@mui/material/colors";
 
 type Props = {
   prop: BoxType;
@@ -38,14 +45,28 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           valueLabelDisplay="auto"
         />
       </Box>
-      <Box display="flex" flexDirection="column" p={1} gap={0.5}>
-        <Typography fontSize={14}>width</Typography>
+      <Box display="flex" flexDirection="column" p={1}>
+        <Box display="flex" alignItems="center">
+          <FormControlLabel
+            control={
+              <Checkbox
+                size="small"
+                onChange={(e) =>
+                  setProp({ ...prop, width: e.target.checked ? 0 : undefined })
+                }
+              />
+            }
+            label={<Typography fontSize={14}>width</Typography>}
+          />
+          {/* <Typography mr={1} fontSize={14}>width</Typography> */}
+        </Box>
         <Slider
           size="small"
           defaultValue={70}
           max={1000}
           min={0}
           value={prop?.width ?? 0}
+	  disabled={prop.width === undefined}
           onChange={(_, v) =>
             setProp({
               ...prop,

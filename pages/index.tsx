@@ -14,22 +14,21 @@ const Home: NextPage = () => {
     ],
   } as BoxType);
   return (
-    <Box display="flex">
+    <Box p={1} height="100vh" display="flex" justifyContent="space-around">
       <Box
-        m={2}
+        mx={1}
         p={2}
-        width={400}
-        height={500}
+        width="20%"
+        height="100%"
         bgcolor={grey[100]}
         display="flex"
         flexDirection="column"
-      >
-      </Box>
+      ></Box>
       <Box
-        m={2}
+        mx={1}
         p={2}
-        width={500}
-        height={500}
+        width="60%"
+        height="100%"
         bgcolor={grey[100]}
         display="flex"
         justifyContent="center"
@@ -37,12 +36,11 @@ const Home: NextPage = () => {
       >
         <BoxAdusting prop={prop} />
       </Box>
-
       <Box
-        m={2}
+        mx={1}
         p={2}
-        width={300}
-        height={500}
+        width="20%"
+        height="100%"
         bgcolor={grey[100]}
         display="flex"
         flexDirection="column"

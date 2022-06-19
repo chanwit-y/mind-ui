@@ -10,8 +10,8 @@ export const BoxAdusting: FC<Props> = ({ prop }) => {
   return (
     <Box
       p={prop?.padding ?? 0}
-      width={prop?.width ?? 100}
-      height={prop?.height ?? 100}
+      width={prop?.width}
+      height={prop?.height}
       bgcolor={prop?.bgColor}
       borderRadius={prop?.borderRadius}
     >
