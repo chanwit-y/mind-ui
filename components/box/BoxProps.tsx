@@ -13,7 +13,7 @@ import { CirclePicker } from "react-color";
 import React, { Dispatch, SetStateAction, FC, Fragment } from "react";
 import { BoxType } from "./BoxType";
 import { blue, grey } from "@mui/material/colors";
-import { SizeAdust } from "../common/SizeAdust";
+import { SizeAdjust } from "../common/SizeAdjust";
 
 type Props = {
   prop: BoxType;
@@ -33,7 +33,7 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           onChangeComplete={(v) => setProp({ ...prop, bgColor: v.hex })}
         />
       </Box>
-      <SizeAdust
+      <SizeAdjust
         name="padding"
         label="padding"
 	max={10}
@@ -41,19 +41,19 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
         setProp={setProp}
 	isPxOnly
       />
-      <SizeAdust
+      <SizeAdjust
         name="width"
         label="width"
         value={prop.width}
         setProp={setProp}
       />
-      <SizeAdust
+      <SizeAdjust
         name="height"
         label="height"
         value={prop.height}
         setProp={setProp}
       />
-      <SizeAdust
+      <SizeAdjust
         name="borderRadius"
         label="Border Radius"
 	max={50}

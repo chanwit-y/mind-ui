@@ -22,7 +22,7 @@ type Props = {
   min?: number;
 };
 
-export const SizeAdust: FC<Props> = ({
+export const SizeAdjust: FC<Props> = ({
   name,
   label,
   value,
