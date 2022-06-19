@@ -18,6 +18,16 @@ const Home: NextPage = () => {
       <Box
         m={2}
         p={2}
+        width={400}
+        height={500}
+        bgcolor={grey[100]}
+        display="flex"
+        flexDirection="column"
+      >
+      </Box>
+      <Box
+        m={2}
+        p={2}
         width={500}
         height={500}
         bgcolor={grey[100]}
@@ -29,7 +39,7 @@ const Home: NextPage = () => {
       </Box>
 
       <Box
-        m={1}
+        m={2}
         p={2}
         width={300}
         height={500}
