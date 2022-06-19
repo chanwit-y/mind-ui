@@ -27,7 +27,7 @@ const Home: NextPage = () => {
       <Box
         mx={1}
         p={2}
-        width="60%"
+        width="55%"
         height="100%"
         bgcolor={grey[100]}
         display="flex"
@@ -39,11 +39,14 @@ const Home: NextPage = () => {
       <Box
         mx={1}
         p={2}
-        width="20%"
+        width="25%"
         height="100%"
         bgcolor={grey[100]}
         display="flex"
         flexDirection="column"
+        sx={{
+          overflowY: "auto"
+        }}
       >
         <BoxProps prop={prop} setProp={setProp} />
       </Box>
