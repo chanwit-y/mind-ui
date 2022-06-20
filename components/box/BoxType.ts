@@ -8,4 +8,5 @@ export type BoxType = {
   height?: number;
   borderRadius?: number;
   padding?: number;
+  margin?: number;
 };

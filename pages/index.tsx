@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         display="flex"
         flexDirection="column"
         sx={{
-          overflowY: "auto"
+          overflowY: "auto",
         }}
       >
         <BoxProps prop={prop} setProp={setProp} />

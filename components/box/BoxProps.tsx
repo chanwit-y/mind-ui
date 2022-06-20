@@ -1,9 +1,8 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { CirclePicker } from "react-color";
 import React, { Dispatch, SetStateAction, FC, Fragment } from "react";
 import { BoxType } from "./BoxType";
-import { grey } from "@mui/material/colors";
-import { SizeAdjust } from "components/common/SizeAdjust";
+import { SizeAdjust,LabelGroup } from "components/common";
 
 type Props = {
   prop: BoxType;
@@ -23,25 +22,28 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           onChangeComplete={(v) => setProp({ ...prop, bgColor: v.hex })}
         />
       </Box>
-      <SizeAdjust
-        name="padding"
-        label="padding"
-        max={10}
-        value={prop.padding}
-        setProp={setProp}
-        isPxOnly
-      />
 
-      <Typography
-        fontSize={12}
-        color={grey[800]}
-        fontWeight={700}
-        letterSpacing={1}
-      >
-        Size
-      </Typography>
-      {/* <Divider /> */}
-      <Box pl={2}>
+      <LabelGroup label="Margin/Padding">
+        <SizeAdjust
+          name="margin"
+          label="margin"
+          max={10}
+          value={prop.margin}
+          setProp={setProp}
+          isPxOnly
+        />
+        <SizeAdjust
+          name="padding"
+          label="padding"
+          max={10}
+          value={prop.padding}
+          setProp={setProp}
+          isPxOnly
+        />
+      </LabelGroup>
+
+
+      <LabelGroup label="Size">
         <SizeAdjust
           name="width"
           label="width"
@@ -54,18 +56,9 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           value={prop.height}
           setProp={setProp}
         />
-      </Box>
+      </LabelGroup>
 
-      <Typography
-        fontSize={12}
-        color={grey[800]}
-        fontWeight={700}
-        letterSpacing={1}
-      >
-        Border
-      </Typography>
-      {/* <Divider /> */}
-      <Box pl={2}>
+      <LabelGroup label="Border">
         <SizeAdjust
           name="borderRadius"
           label="Border Radius"
@@ -74,7 +67,7 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           value={prop.borderRadius}
           setProp={setProp}
         />
-      </Box>
+      </LabelGroup>
     </Fragment>
   );
 };
