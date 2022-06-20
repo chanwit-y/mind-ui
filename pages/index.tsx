@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { BoxAdusting, BoxProps, BoxType } from "components/box";
+import { Toolbox } from "@/components/toolbox/Toolbox";
 
 const Home: NextPage = () => {
   const [prop, setProp] = useState<BoxType>({
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
       <Box width={50} height={50} bgcolor="blue"></Box>,
     ],
   } as BoxType);
+
   return (
     <Box p={1} height="100vh" display="flex" justifyContent="space-around">
       <Box
@@ -23,7 +25,9 @@ const Home: NextPage = () => {
         bgcolor={grey[100]}
         display="flex"
         flexDirection="column"
-      ></Box>
+      >
+        <Toolbox />
+      </Box>
       <Box
         mx={1}
         p={2}
