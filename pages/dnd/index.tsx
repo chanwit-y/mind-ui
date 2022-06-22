@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
-import { FC, Fragment, ReactNode } from "react";
+import { FC, Fragment, ReactNode, useEffect, useState } from "react";
 
 const DND: NextPage = () => {
   const Knight = () => (
     <span
       style={{
-        width: "100",
-        height: "100",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontSize: 80,
       }}
     >
       ♘
@@ -69,7 +71,18 @@ const DND: NextPage = () => {
     );
   };
 
-  return <Board knightPosition={[0, 0]} />;
+  const [positions, setPositions] = useState<[number, number]>([0, 0]);
+
+  const observe = () => {
+    const randPos = () => Math.floor(Math.random() * 8);
+    setInterval(() => setPositions([randPos(), randPos()]), 500);
+  };
+
+  useEffect(() => {
+    observe();
+  }, []);
+
+  return <Board knightPosition={positions} />;
 };
 
 export default DND;
