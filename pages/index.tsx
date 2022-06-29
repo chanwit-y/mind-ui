@@ -1,19 +1,31 @@
 import type { NextPage } from "next";
-import { useState } from "react";
-import { Box } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, TextField } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { BoxAdusting, BoxProps, BoxType } from "components/box";
-import { Toolbox } from "@/components/toolbox/Toolbox";
+import { useRecoilState } from "recoil";
+import { toolboxAtom } from "lib/atom/toolbox";
 
 const Home: NextPage = () => {
-  const [prop, setProp] = useState<BoxType>({
-    childrens: [
-      <Box width={50} height={50} bgcolor="red">
-        x
-      </Box>,
-      <Box width={50} height={50} bgcolor="blue"></Box>,
-    ],
-  } as BoxType);
+  const [selectTool, setSelectTool] = useRecoilState(toolboxAtom);
+  const [prop, setProp] = useState<BoxType>({} as BoxType);
+
+  useEffect(() => {
+    console.log(selectTool);
+    if (selectTool !== "") {
+      setProp((perv) => ({
+        ...perv,
+        childrens: perv?.childrens
+          ? [...perv.childrens, <TextField />]
+          : [<TextField />],
+      }));
+      setSelectTool("");
+    }
+  }, [selectTool]);
+
+  useEffect(() => {
+    console.log(prop);
+  }, [prop]);
 
   return (
     <Box p={1} height="100vh" display="flex" justifyContent="space-around">
@@ -26,7 +38,13 @@ const Home: NextPage = () => {
         display="flex"
         flexDirection="column"
       >
-        <Toolbox />
+        <button
+          onClick={() => {
+            setProp((perv) => ({ ...perv, childrens: [] }));
+          }}
+        >
+          Clear
+        </button>
       </Box>
       <Box
         mx={1}

@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import React, { FC } from "react";
+import { Children } from "../children";
 import { BoxType } from "./BoxType";
 
 type Props = {
@@ -16,7 +17,7 @@ export const BoxAdusting: FC<Props> = ({ prop }) => {
       bgcolor={prop?.bgColor}
       borderRadius={prop?.borderRadius}
     >
-      {prop?.childrens?.map((c) => c)}
+      {prop?.childrens ? prop?.childrens?.map((c) => c) : <Children />}
     </Box>
   );
 };
