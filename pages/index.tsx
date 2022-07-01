@@ -16,8 +16,23 @@ const Home: NextPage = () => {
       setProp((perv) => ({
         ...perv,
         childrens: perv?.childrens
-          ? [...perv.childrens, <TextField />]
-          : [<TextField />],
+          ? [
+              ...perv.childrens,
+              <TextField
+                sx={{
+                  "& .MuiInputBase-root": {
+                    backgroundColor: "white",
+                    height: "40px",
+                  },
+                }}
+              />,
+            ]
+          : [<TextField sx={{ 
+                  "& .MuiInputBase-root": {
+                    backgroundColor: "white",
+                    height: "40px",
+                  },
+ }} />],
       }));
       setSelectTool("");
     }
@@ -56,7 +71,7 @@ const Home: NextPage = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <BoxAdusting prop={prop} />
+        <BoxAdusting isPerview={true} prop={prop} />
       </Box>
       <Box
         mx={1}

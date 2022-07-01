@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from "react";
-import { Box, Popover } from "@mui/material";
+import { Box, IconButton, Popover } from "@mui/material";
 import { green, grey } from "@mui/material/colors";
 
 import AddIcon from "@mui/icons-material/Add";
@@ -27,13 +27,16 @@ export const Children = () => {
   return (
     <Fragment>
       <div onClick={handleClick}>
-        <Box
+        <IconButton size="small">
+          <AddIcon fontSize="small" />
+        </IconButton>
+        {/* <Box
           p={1}
           bgcolor={green[100]}
           color={grey[600]}
           borderRadius={1}
-          width="100%"
-          height="100%"
+          width="70%"
+          height="70%"
           display="flex"
           justifyContent="center"
           alignItems="center"
@@ -45,7 +48,7 @@ export const Children = () => {
           }}
         >
           <AddIcon />
-        </Box>
+        </Box> */}
       </div>
       <Popover
         open={open}
