@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 export type BoxType = {
+  id: string;
   index?: string;
   childrens?: ReactNode[];
   bgColor?: string;

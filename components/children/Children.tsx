@@ -1,17 +1,17 @@
 import React, { Fragment, useEffect } from "react";
-import { Box, IconButton, Popover } from "@mui/material";
-import { green, grey } from "@mui/material/colors";
+import {  Box, IconButton, Popover } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
+
 import { Components } from "./Components";
 import { useRecoilState } from "recoil";
 import { toolboxAtom } from "lib/atom/toolbox";
 
 export const Children = () => {
   const [selectTool] = useRecoilState(toolboxAtom);
-  const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -26,8 +26,8 @@ export const Children = () => {
 
   return (
     <Fragment>
-      <div onClick={handleClick}>
-        <IconButton size="small">
+      <Box>
+        <IconButton onClick={handleClick} size="small">
           <AddIcon fontSize="small" />
         </IconButton>
         {/* <Box
@@ -49,7 +49,7 @@ export const Children = () => {
         >
           <AddIcon />
         </Box> */}
-      </div>
+      </Box>
       <Popover
         open={open}
         anchorEl={anchorEl}

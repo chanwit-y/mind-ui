@@ -1,8 +1,13 @@
-import { Box } from "@mui/material";
-import { red } from "@mui/material/colors";
+import { Box, IconButton } from "@mui/material";
+import { grey, red } from "@mui/material/colors";
 import React, { FC, useMemo } from "react";
+import { useRecoilState } from "recoil";
 import { Children, Empty } from "../children";
 import { BoxType } from "./BoxType";
+import { focusCompentAtom } from "../../lib/atom/toolbox";
+
+import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 
 type Props = {
   isPerview: boolean;
@@ -10,6 +15,7 @@ type Props = {
 };
 
 export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
+  const [focus, setFocus] = useRecoilState(focusCompentAtom);
   const isChildrenEmpty = useMemo(
     () => prop?.childrens === undefined,
     [prop?.childrens]
@@ -25,14 +31,14 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
       borderRadius={1}
       sx={{
         borderStyle: "dashed",
-        borderColor: red[200],
+        borderColor: focus === prop.id ? red[200] : grey[200],
       }}
     >
       <Box
         p={prop?.padding ?? 0}
         m={prop?.margin ?? 0}
-        width={!!!prop?.width && isChildrenEmpty ? 60 : prop?.width}
-        height={!!!prop?.height && isChildrenEmpty ? 60 : prop?.height}
+        width={!!!prop?.width && isChildrenEmpty ? 70 : prop?.width}
+        height={!!!prop?.height && isChildrenEmpty ? 85 : prop?.height}
         bgcolor={prop?.bgColor}
         borderRadius={prop?.borderRadius}
       >
@@ -44,7 +50,13 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
       </Box>
       {isPerview && (
         <Box>
+          <IconButton onClick={() => setFocus(prop.id)} size="small">
+            <CenterFocusStrongIcon fontSize="small" />
+          </IconButton>
           <Children />
+          <IconButton onClick={() => setFocus(prop.id)} size="small">
+            <ListAltIcon fontSize="small" />
+          </IconButton>
         </Box>
       )}
     </Box>

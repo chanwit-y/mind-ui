@@ -1,38 +1,28 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { Box, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { BoxAdusting, BoxProps, BoxType } from "components/box";
 import { useRecoilState } from "recoil";
-import { toolboxAtom } from "lib/atom/toolbox";
+import { toolboxAtom, focusCompentAtom } from "lib/atom/toolbox";
+import { uuid } from 'uuidv4';
 
 const Home: NextPage = () => {
   const [selectTool, setSelectTool] = useRecoilState(toolboxAtom);
-  const [prop, setProp] = useState<BoxType>({} as BoxType);
+  const [focus, setFocus] = useRecoilState(focusCompentAtom);
+  const [prop, setProp] = useState<BoxType>({id: uuid()} as BoxType);
+
+  useEffect(() => setFocus(prop.id), [prop.id])
 
   useEffect(() => {
     console.log(selectTool);
     if (selectTool !== "") {
+      //check focus id and add component to children
       setProp((perv) => ({
         ...perv,
         childrens: perv?.childrens
-          ? [
-              ...perv.childrens,
-              <TextField
-                sx={{
-                  "& .MuiInputBase-root": {
-                    backgroundColor: "white",
-                    height: "40px",
-                  },
-                }}
-              />,
-            ]
-          : [<TextField sx={{ 
-                  "& .MuiInputBase-root": {
-                    backgroundColor: "white",
-                    height: "40px",
-                  },
- }} />],
+          ? [...perv.childrens, <BoxAdusting isPerview={true} prop={{id: uuid()}} />]
+          : [<BoxAdusting isPerview={true} prop={{id: uuid()}} />],
       }));
       setSelectTool("");
     }
@@ -60,6 +50,7 @@ const Home: NextPage = () => {
         >
           Clear
         </button>
+        {focus}
       </Box>
       <Box
         mx={1}
