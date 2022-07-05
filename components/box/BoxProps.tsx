@@ -4,6 +4,8 @@ import React, { Dispatch, SetStateAction, FC } from "react";
 import { BoxType, FlexDirectionType } from "./BoxType";
 import { SizeAdjust, LabelGroup } from "components/common";
 import { SelectField } from "../common/SelectField";
+import { useRecoilState } from "recoil";
+import { focusCompentAtom } from "lib/atom/toolbox";
 
 type Props = {
   prop: BoxType;
@@ -11,6 +13,8 @@ type Props = {
 };
 
 export const BoxProps: FC<Props> = ({ prop, setProp }) => {
+  const [focus, setFocus] = useRecoilState(focusCompentAtom);
+
   return (
     <Box px={2} height={600} overflow="auto">
       <Box p={1} pt={2} bgcolor="white" position="sticky" top={0} zIndex={100}>
