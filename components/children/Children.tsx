@@ -34,7 +34,7 @@ export const Children: FC<Props> = ({ setFocus }) => {
   return (
     <Fragment>
       <Box>
-        <IconButton onClick={handleClick} size="small">
+        <IconButton sx={{backgroundColor: "white", marginBottom: 1,}} onClick={handleClick} size="small">
           <AddIcon fontSize="small" />
         </IconButton>
         {/* <Box

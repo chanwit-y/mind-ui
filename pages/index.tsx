@@ -1,11 +1,12 @@
 import type { NextPage } from "next";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState, MouseEvent } from "react";
 import { Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { BoxAdusting, BoxProps, BoxType } from "components/box";
 import { useRecoilState } from "recoil";
 import { toolboxAtom, focusCompentAtom } from "lib/atom/toolbox";
 import { uuid } from "uuidv4";
+import { Property } from "@/components/property";
 
 const Home: NextPage = () => {
   const [selectTool, setSelectTool] = useRecoilState(toolboxAtom);
@@ -37,7 +38,7 @@ const Home: NextPage = () => {
       const id = uuid();
       const reactNode = {
         id: id,
-        reactNode: <BoxAdusting isPerview={true} prop={{ id }} />,
+        reactNode: <BoxAdusting isPerview={true} prop={{ id }} setProp={setProp} />,
       };
 
       setProp({ ...updateChildrenById(focus, prop, reactNode) });
@@ -49,21 +50,23 @@ const Home: NextPage = () => {
     console.log(prop);
   }, [prop]);
 
+
+
   return (
     <Box p={1} height="100vh" display="flex" justifyContent="space-around">
       <Box
         mx={1}
         p={2}
-        width="75%"
+        width="100%"
         height="100%"
         bgcolor={grey[100]}
         display="flex"
         justifyContent="center"
         alignItems="center"
       >
-        <BoxAdusting isPerview={true} prop={prop} />
+        <BoxAdusting isPerview={true} prop={prop} setProp={setProp} />
       </Box>
-      <Box
+      {/* <Box
         mx={1}
         p={2}
         width="25%"
@@ -76,7 +79,7 @@ const Home: NextPage = () => {
         }}
       >
         <BoxProps prop={prop} setProp={setProp} />
-      </Box>
+      </Box> */}
     </Box>
   );
 };

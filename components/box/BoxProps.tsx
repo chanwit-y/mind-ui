@@ -11,7 +11,7 @@ type Props = {
 
 export const BoxProps: FC<Props> = ({ prop, setProp }) => {
   return (
-    <Fragment>
+    <Box p={2}>
       <Typography fontWeight={700} letterSpacing={2}>
         Props
       </Typography>
@@ -68,6 +68,6 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           setProp={setProp}
         />
       </LabelGroup>
-    </Fragment>
+    </Box>
   );
 };

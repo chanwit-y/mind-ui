@@ -1,25 +1,39 @@
 import { Box, IconButton } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
-import React, { FC, useMemo } from "react";
+import React, {
+  FC,
+  useMemo,
+  useState,
+  MouseEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useRecoilState } from "recoil";
 import { Children, Empty } from "../children";
 import { BoxType } from "./BoxType";
 import { focusCompentAtom } from "../../lib/atom/toolbox";
 
-import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
 import ListAltIcon from "@mui/icons-material/ListAlt";
+import { Property } from "../property";
 
 type Props = {
   isPerview: boolean;
   prop: BoxType;
+  setProp: Dispatch<SetStateAction<BoxType>>;
 };
 
-export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
+export const BoxAdusting: FC<Props> = ({ isPerview, prop, setProp }) => {
   const [focus, setFocus] = useRecoilState(focusCompentAtom);
   const isChildrenEmpty = useMemo(
     () => prop?.childrens === undefined,
     [prop?.childrens]
   );
+
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   return (
     <Box
@@ -46,18 +60,32 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
           <Empty />
         ) : (
           prop?.childrens?.map((c) => (
-            <BoxAdusting isPerview={true} prop={c} />
+            <BoxAdusting isPerview={true} prop={c} setProp={setProp} />
           ))
         )}
       </Box>
       {isPerview && (
         <Box>
           <Children setFocus={() => setFocus(prop.id)} />
-          <IconButton onClick={() => setFocus(prop.id)} size="small">
+          <IconButton
+            sx={{ backgroundColor: "white" }}
+            onClick={(e) => {
+              setFocus(prop.id);
+              handleClick(e);
+            }}
+            size="small"
+          >
             <ListAltIcon fontSize="small" />
           </IconButton>
         </Box>
       )}
+
+      <Property
+        anchorEl={anchorEl}
+        setAnchorEl={setAnchorEl}
+        prop={prop}
+        setProp={setProp}
+      />
     </Box>
   );
 };
