@@ -6,6 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Components } from "./Components";
 import { useRecoilState } from "recoil";
 import { toolboxAtom } from "lib/atom/toolbox";
+import { grey } from "@mui/material/colors";
 
 type Props = {
   setFocus: Function;
@@ -34,7 +35,18 @@ export const Children: FC<Props> = ({ setFocus }) => {
   return (
     <Fragment>
       <Box>
-        <IconButton sx={{backgroundColor: "white", marginBottom: 1,}} onClick={handleClick} size="small">
+        <IconButton
+          sx={{
+            backgroundColor: "white",
+            marginBottom: 1,
+
+            ":hover": {
+              backgroundColor: grey[200],
+            },
+          }}
+          onClick={handleClick}
+          size="small"
+        >
           <AddIcon fontSize="small" />
         </IconButton>
         {/* <Box

@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 export type BoxType = {
   id: string;
   index?: string;
+  display?: string;
   // reactNode?: ReactNode;
   childrens?: BoxType[]
   bgColor?: string;

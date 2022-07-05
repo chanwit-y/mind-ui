@@ -1,8 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { CirclePicker } from "react-color";
 import React, { Dispatch, SetStateAction, FC, Fragment } from "react";
 import { BoxType } from "./BoxType";
-import { SizeAdjust,LabelGroup } from "components/common";
+import { SizeAdjust, LabelGroup } from "components/common";
 
 type Props = {
   prop: BoxType;
@@ -10,11 +10,18 @@ type Props = {
 };
 
 export const BoxProps: FC<Props> = ({ prop, setProp }) => {
+  const handleChange = (event: SelectChangeEvent) => {
+    setProp((perv) => ({...perv, display: Number(event.target.value).toDisplay()}));
+  };
+
   return (
-    <Box p={2}>
-      <Typography fontWeight={700} letterSpacing={2}>
-        Props
-      </Typography>
+    <Box px={2} height={600} overflow="auto">
+      <Box p={1} pt={2} bgcolor="white" position="sticky" top={0} zIndex={100}>
+        <Typography mb={1} fontWeight={700} letterSpacing={2}>
+          Props
+        </Typography>
+        <Divider />
+      </Box>
       <Box display="flex" flexDirection="column" p={1} gap={1}>
         <Typography fontSize={14}>Bg color</Typography>
         <CirclePicker
@@ -22,6 +29,23 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           onChangeComplete={(v) => setProp({ ...prop, bgColor: v.hex })}
         />
       </Box>
+      <LabelGroup label="Flex">
+        <FormControl fullWidth  size="small"  sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel>Display</InputLabel>
+          <Select
+            value={prop.display}
+            label="Display"
+            onChange={handleChange}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={1}>flex</MenuItem>
+            <MenuItem value={2}>Twenty</MenuItem>
+            <MenuItem value={3}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
+      </LabelGroup>
 
       <LabelGroup label="Margin/Padding">
         <SizeAdjust
@@ -41,7 +65,6 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
           isPxOnly
         />
       </LabelGroup>
-
 
       <LabelGroup label="Size">
         <SizeAdjust

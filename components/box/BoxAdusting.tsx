@@ -51,8 +51,13 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop, setProp }) => {
       <Box
         p={prop?.padding ?? 0}
         m={prop?.margin ?? 0}
-        width={!!!prop?.width && isChildrenEmpty ? 70 : prop?.width}
-        height={!!!prop?.height && isChildrenEmpty ? 85 : prop?.height}
+        // width={!!!prop?.width && isChildrenEmpty ? "100%" : prop?.width}
+        display={prop?.display}
+        width={prop?.width}
+        minWidth={70}
+        // height={!!!prop?.height && isChildrenEmpty ? "100%" : prop?.height}
+        height={prop?.height}
+        minHeight={85}
         bgcolor={prop?.bgColor}
         borderRadius={prop?.borderRadius}
       >
@@ -65,10 +70,15 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop, setProp }) => {
         )}
       </Box>
       {isPerview && (
-        <Box>
+        <Box justifySelf="end">
           <Children setFocus={() => setFocus(prop.id)} />
           <IconButton
-            sx={{ backgroundColor: "white" }}
+            sx={{
+              backgroundColor: "white",
+              ":hover": {
+                backgroundColor: grey[200],
+              },
+            }}
             onClick={(e) => {
               setFocus(prop.id);
               handleClick(e);

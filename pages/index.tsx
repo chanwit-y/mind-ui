@@ -1,12 +1,13 @@
 import type { NextPage } from "next";
-import { ReactNode, useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { BoxAdusting, BoxProps, BoxType } from "components/box";
 import { useRecoilState } from "recoil";
 import { toolboxAtom, focusCompentAtom } from "lib/atom/toolbox";
 import { uuid } from "uuidv4";
-import { Property } from "@/components/property";
+
+import "@/extensions/Number.extension"
 
 const Home: NextPage = () => {
   const [selectTool, setSelectTool] = useRecoilState(toolboxAtom);
