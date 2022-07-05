@@ -25,7 +25,7 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
     <Box
       p={0.5}
       display="flex"
-      alignItems="center"
+      alignItems="top"
       gap={1}
       border={2}
       borderRadius={1}
@@ -52,10 +52,10 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
       </Box>
       {isPerview && (
         <Box>
-          <IconButton onClick={() => setFocus(prop.id)} size="small">
+          {/* <IconButton onClick={() => setFocus(prop.id)} size="small">
             <CenterFocusStrongIcon fontSize="small" />
-          </IconButton>
-          <Children />
+          </IconButton> */}
+          <Children setFocus={() => setFocus(prop.id)} />
           <IconButton onClick={() => setFocus(prop.id)} size="small">
             <ListAltIcon fontSize="small" />
           </IconButton>

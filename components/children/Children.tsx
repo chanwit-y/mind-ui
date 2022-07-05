@@ -1,5 +1,5 @@
-import React, { Fragment, useEffect } from "react";
-import {  Box, IconButton, Popover } from "@mui/material";
+import React, { Fragment, useEffect, FC } from "react";
+import { Box, IconButton, Popover } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -7,11 +7,18 @@ import { Components } from "./Components";
 import { useRecoilState } from "recoil";
 import { toolboxAtom } from "lib/atom/toolbox";
 
-export const Children = () => {
+type Props = {
+  setFocus: Function;
+};
+
+export const Children: FC<Props> = ({ setFocus }) => {
   const [selectTool] = useRecoilState(toolboxAtom);
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null
+  );
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setFocus();
     setAnchorEl(event.currentTarget);
   };
 
