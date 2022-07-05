@@ -1,4 +1,5 @@
 import {
+  Divider,
   List,
   ListItemButton,
   ListItemText,
@@ -20,9 +21,13 @@ export const Components = () => {
       component="nav"
       subheader={<ListSubheader component="div">Toolbox</ListSubheader>}
     >
+      <Divider />
       {tools.map((t) => (
-        <ListItemButton onClick={() => setSelectTool(t)}>
-          <ListItemText primary={t} />
+        <ListItemButton sx={{ height: 32 }} onClick={() => setSelectTool(t)}>
+          <ListItemText
+            primary={t}
+            primaryTypographyProps={{ fontSize: 14  }}
+          />
         </ListItemButton>
       ))}
     </List>

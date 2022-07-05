@@ -52,9 +52,6 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
       </Box>
       {isPerview && (
         <Box>
-          {/* <IconButton onClick={() => setFocus(prop.id)} size="small">
-            <CenterFocusStrongIcon fontSize="small" />
-          </IconButton> */}
           <Children setFocus={() => setFocus(prop.id)} />
           <IconButton onClick={() => setFocus(prop.id)} size="small">
             <ListAltIcon fontSize="small" />
