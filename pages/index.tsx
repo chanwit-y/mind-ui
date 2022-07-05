@@ -1,32 +1,57 @@
 import type { NextPage } from "next";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { BoxAdusting, BoxProps, BoxType } from "components/box";
 import { useRecoilState } from "recoil";
 import { toolboxAtom, focusCompentAtom } from "lib/atom/toolbox";
-import { uuid } from 'uuidv4';
+import { uuid } from "uuidv4";
 
 const Home: NextPage = () => {
   const [selectTool, setSelectTool] = useRecoilState(toolboxAtom);
   const [focus, setFocus] = useRecoilState(focusCompentAtom);
-  const [prop, setProp] = useState<BoxType>({id: uuid()} as BoxType);
+  const [prop, setProp] = useState<BoxType>({ id: uuid() } as BoxType);
 
-  useEffect(() => setFocus(prop.id), [prop.id])
+  useEffect(() => setFocus(prop.id), [prop.id]);
 
+  //effect when selectTool, focus change
   useEffect(() => {
-    console.log(selectTool);
     if (selectTool !== "") {
+      const updateChildrenById = (
+        id: string,
+        data: BoxType,
+        value: BoxType
+      ) => {
+        if (data.id == id) {
+          data.childrens =
+            data?.childrens !== undefined
+              ? [...data.childrens, { ...value }]
+              : [value];
+        }
+        if (data.childrens !== undefined && data.childrens.length > 0) {
+          for (let i = 0; i < data.childrens.length; i++) {
+            data.childrens[i] = updateChildrenById(
+              id,
+              data.childrens[i],
+              value
+            );
+          }
+        }
+
+        return data;
+      };
+
       //check focus id and add component to children
-      setProp((perv) => ({
-        ...perv,
-        childrens: perv?.childrens
-          ? [...perv.childrens, <BoxAdusting isPerview={true} prop={{id: uuid()}} />]
-          : [<BoxAdusting isPerview={true} prop={{id: uuid()}} />],
-      }));
+      const id = uuid();
+      const reactNode = {
+        id: id,
+        reactNode: <BoxAdusting isPerview={true} prop={{ id }} />,
+      };
+
+      setProp({...updateChildrenById(focus, prop, reactNode)});
       setSelectTool("");
     }
-  }, [selectTool]);
+  }, [selectTool, focus]);
 
   useEffect(() => {
     console.log(prop);
@@ -45,7 +70,7 @@ const Home: NextPage = () => {
       >
         <button
           onClick={() => {
-            setProp((perv) => ({ ...perv, childrens: [] }));
+            setProp((perv) => ({ ...perv, reactNode: [] }));
           }}
         >
           Clear

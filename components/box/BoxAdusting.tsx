@@ -7,7 +7,7 @@ import { BoxType } from "./BoxType";
 import { focusCompentAtom } from "../../lib/atom/toolbox";
 
 import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
-import ListAltIcon from '@mui/icons-material/ListAlt';
+import ListAltIcon from "@mui/icons-material/ListAlt";
 
 type Props = {
   isPerview: boolean;
@@ -31,7 +31,7 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
       borderRadius={1}
       sx={{
         borderStyle: "dashed",
-        borderColor: focus === prop.id ? red[200] : grey[200],
+        borderColor: focus === prop.id ? red[200] : grey[300],
       }}
     >
       <Box
@@ -45,7 +45,9 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop }) => {
         {isChildrenEmpty && isPerview ? (
           <Empty />
         ) : (
-          prop?.childrens?.map((c) => c)
+          prop?.childrens?.map((c) => (
+            <BoxAdusting isPerview={true} prop={c} />
+          ))
         )}
       </Box>
       {isPerview && (
