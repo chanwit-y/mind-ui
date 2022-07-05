@@ -51,11 +51,10 @@ export const BoxAdusting: FC<Props> = ({ isPerview, prop, setProp }) => {
       <Box
         p={prop?.padding ?? 0}
         m={prop?.margin ?? 0}
-        // width={!!!prop?.width && isChildrenEmpty ? "100%" : prop?.width}
         display={prop?.display}
+        flexDirection={prop?.flexDirection}
         width={prop?.width}
         minWidth={70}
-        // height={!!!prop?.height && isChildrenEmpty ? "100%" : prop?.height}
         height={prop?.height}
         minHeight={85}
         bgcolor={prop?.bgColor}

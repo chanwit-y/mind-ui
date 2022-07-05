@@ -1,8 +1,9 @@
-import { Box, Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
+import { Box, Divider, SelectChangeEvent, Typography } from "@mui/material";
 import { CirclePicker } from "react-color";
-import React, { Dispatch, SetStateAction, FC, Fragment } from "react";
-import { BoxType } from "./BoxType";
+import React, { Dispatch, SetStateAction, FC } from "react";
+import { BoxType, FlexDirectionType } from "./BoxType";
 import { SizeAdjust, LabelGroup } from "components/common";
+import { SelectField } from "../common/SelectField";
 
 type Props = {
   prop: BoxType;
@@ -10,10 +11,6 @@ type Props = {
 };
 
 export const BoxProps: FC<Props> = ({ prop, setProp }) => {
-  const handleChange = (event: SelectChangeEvent) => {
-    setProp((perv) => ({...perv, display: Number(event.target.value).toDisplay()}));
-  };
-
   return (
     <Box px={2} height={600} overflow="auto">
       <Box p={1} pt={2} bgcolor="white" position="sticky" top={0} zIndex={100}>
@@ -30,21 +27,31 @@ export const BoxProps: FC<Props> = ({ prop, setProp }) => {
         />
       </Box>
       <LabelGroup label="Flex">
-        <FormControl fullWidth  size="small"  sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel>Display</InputLabel>
-          <Select
-            value={prop.display}
-            label="Display"
-            onChange={handleChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={1}>flex</MenuItem>
-            <MenuItem value={2}>Twenty</MenuItem>
-            <MenuItem value={3}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
+        <SelectField
+          label="display"
+          value={prop?.display ?? ""}
+          onSelected={(event: SelectChangeEvent) =>
+            setProp((perv) => ({ ...perv, display: event.target.value }))
+          }
+          items={[
+            { text: "flex", value: "flex" },
+            { text: "grid", value: "grid" },
+          ]}
+        />
+        <SelectField
+          label="flexDirection"
+          value={prop?.flexDirection ?? ""}
+          onSelected={(event: SelectChangeEvent) =>
+            setProp((perv) => ({
+              ...perv,
+              flexDirection: event.target.value as FlexDirectionType,
+            }))
+          }
+          items={[
+            { text: "row", value: "row" },
+            { text: "column", value: "column" },
+          ]}
+        />
       </LabelGroup>
 
       <LabelGroup label="Margin/Padding">

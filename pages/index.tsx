@@ -8,6 +8,7 @@ import { toolboxAtom, focusCompentAtom } from "lib/atom/toolbox";
 import { uuid } from "uuidv4";
 
 import "@/extensions/Number.extension"
+import "@/extensions/String.extension"
 
 const Home: NextPage = () => {
   const [selectTool, setSelectTool] = useRecoilState(toolboxAtom);

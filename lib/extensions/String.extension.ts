@@ -2,15 +2,17 @@ export {};
 
 declare global {
   interface String {
-    toDisplay: () => number;
+    toDisplayValue: () => string;
   }
 }
 
-String.prototype.toDisplay = function (): number {
+String.prototype.toDisplayValue = function (): string {
   switch (String(this)) {
     case "flex":
-      return 0;
+      return "1";
+    case "grid":
+      return "2";
     default:
-      return 0;
+      return "";
   }
 };
